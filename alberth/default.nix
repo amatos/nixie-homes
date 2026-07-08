@@ -5,7 +5,7 @@
 }:
 
 let
-  userDefs = import ../../users.nix;
+  userDefs = import ../users.nix;
   inherit (userDefs) primaryUser;
 in
 {

@@ -4,6 +4,31 @@
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0"; # Stable Nixpkgs (use 0.1 for unstable)
 
+    home-manager = {
+      url = "github:nix-community/home-manager/release-26.05"; # pin to same release as nixpkgs
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-secrets = {
+      url = "github:amatos/nix-secrets";
+      flake = false; # plain git repo, not a flake
+    };
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    qmd = {
+      url = "github:tobi/qmd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +39,11 @@
     {
       self,
       nixpkgs,
+      home-manager,
+      nix-secrets,
+      nvf,
+      qmd,
+      stylix,
       pre-commit-hooks,
       ...
     }:
@@ -27,6 +57,48 @@
         "x86_64-darwin"
       ];
       forAllSystems = lib.genAttrs supportedSystems;
+
+      # Shared home-manager plugin modules — matches nixie's own
+      # modules/nixos/home-manager.nix / hosts/darwin/common-darwin.nix
+      # sharedModules list, so integrated and standalone use behave the same.
+      sharedHomeModules = [
+        nvf.homeManagerModules.default
+        qmd.homeModules.default
+        stylix.homeModules.stylix
+      ];
+
+      # Ready-to-use standalone `home-manager switch --flake .#<name>` configs
+      # for real machines. alberth/nixos.nix is deliberately excluded here: it
+      # reads `osConfig`, a special arg only provided when home-manager runs
+      # as a NixOS/darwin module (as nixie does) — plain
+      # `homeManagerConfiguration` never defines it, so including that module
+      # here would fail to evaluate. Standalone `alberth@gammu` is therefore
+      # a best-effort subset of what nixie actually deploys (missing krb5,
+      # pinentry-tty, and the syncthing-user-unit mask that nixos.nix adds),
+      # not a full mirror.
+      mkHome =
+        {
+          system,
+          hostModule,
+          darwin ? false,
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true; # 1Password, etc. — nixie sets this via
+            # nixpkgs.config.allowUnfree at the NixOS/darwin module level,
+            # which has no effect in a standalone homeManagerConfiguration.
+          };
+          extraSpecialArgs = { inherit nix-secrets; };
+          modules =
+            sharedHomeModules
+            ++ [
+              ./alberth
+              ./alberth/nvf.nix
+            ]
+            ++ lib.optional darwin ./alberth/darwin
+            ++ [ hostModule ];
+        };
 
       # Pre-commit hooks — shared between checks output and devShell shellHook.
       # Running `nix develop` installs the hooks into .git/hooks automatically.
@@ -68,6 +140,39 @@
       );
     in
     {
+      # Importable building blocks — consumed by nixie's own
+      # home-manager.users.<user>.imports, or by any other flake/system.
+      # Naming matches DeterminateSystems' flake-schemas convention
+      # (nixosModules/darwinModules/homeModules), not nvf's older
+      # homeManagerModules name (deprecated by stylix in favor of
+      # homeModules — see CLAUDE.md "Layout").
+      homeModules = {
+        alberth = ./alberth; # cross-platform base
+        alberth-darwin = ./alberth/darwin; # darwin-integration overlay
+        alberth-nixos = ./alberth/nixos.nix; # NixOS-integration overlay (needs osConfig)
+        alberth-nvf = ./alberth/nvf.nix; # neovim via nvf
+        alberth-codex = ./alberth/codex.nix; # codex host overlay
+        alberth-darwintron = ./alberth/darwintron.nix; # darwintron host overlay
+        alberth-gammu = ./alberth/gammu.nix; # gammu host overlay
+      };
+
+      homeConfigurations = {
+        "alberth@codex" = mkHome {
+          system = "aarch64-darwin";
+          hostModule = ./alberth/codex.nix;
+          darwin = true;
+        };
+        "alberth@darwintron" = mkHome {
+          system = "aarch64-darwin";
+          hostModule = ./alberth/darwintron.nix;
+          darwin = true;
+        };
+        "alberth@gammu" = mkHome {
+          system = "x86_64-linux";
+          hostModule = ./alberth/gammu.nix;
+        };
+      };
+
       # Canonical formatter — enables `nix fmt` and `nix run .#formatter -- --check`
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
 

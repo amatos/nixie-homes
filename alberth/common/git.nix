@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  userDefs = import ../../../users.nix;
+  userDefs = import ../../users.nix;
   user = userDefs.${userDefs.primaryUser};
 in
 {

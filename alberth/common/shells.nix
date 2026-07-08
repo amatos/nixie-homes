@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  userDefs = import ../../../users.nix;
+  userDefs = import ../../users.nix;
   inherit (userDefs) primaryUser;
   rebuildCmd = if pkgs.stdenv.isDarwin then "nh darwin" else "nh os";
   switchCmd =

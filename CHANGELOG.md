@@ -37,6 +37,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- `alberth/common/starship.nix` — updated prompt format to use `╭─`/`╰─`
+  line breaks and `mantle` palette for a consistent look across terminals
 - `CLAUDE.md` — populated (was empty): project directives adapted from
   nixie's own `CLAUDE.md` — standalone-vs-integrated usage, the one-way
   dependency rule (never reach back into nixie), the current `alberth/`

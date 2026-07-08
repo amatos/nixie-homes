@@ -23,3 +23,6 @@ All notable changes to this project will be documented in this file.
   dependency rule (never reach back into nixie), current vs. planned
   `Layout`, `homeModules` output naming rationale, and commit/release
   conventions matching nixie
+- `ARCHITECTURE.md` — populated (was empty) with an honest placeholder:
+  this repo isn't wired into nixie yet, so there is no cross-repo
+  architecture to document until the home-manager migration lands

@@ -15,3 +15,11 @@ All notable changes to this project will be documented in this file.
   new hooks have rules to enforce
 - `.gitignore` — `/.direnv`, `/result`, `/.pre-commit-config.yaml`,
   `/.claude`, matching nixie's
+
+### Changed
+
+- `CLAUDE.md` — populated (was empty): project directives adapted from
+  nixie's own `CLAUDE.md` — standalone-vs-integrated usage, the one-way
+  dependency rule (never reach back into nixie), current vs. planned
+  `Layout`, `homeModules` output naming rationale, and commit/release
+  conventions matching nixie

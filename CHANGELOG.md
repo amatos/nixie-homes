@@ -37,6 +37,10 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- `flake.nix` — dropped `x86_64-darwin` from `supportedSystems`; that
+  platform/architecture combination is being deprecated. No
+  `homeConfigurations` entry ever targeted it, so this only affects the
+  dev-tooling matrix (`devShells`/`checks`/`formatter`)
 - `alberth/common/starship.nix` — updated prompt format to use `╭─`/`╰─`
   line breaks and `mantle` palette for a consistent look across terminals
 - `CLAUDE.md` — populated (was empty): project directives adapted from

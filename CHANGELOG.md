@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+---
+
+## 26.07.01
+
 ### Added
 
 - Repo scaffolded: `CLAUDE.md`, `ARCHITECTURE.md`, `README.md`,

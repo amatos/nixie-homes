@@ -15,9 +15,29 @@ All notable changes to this project will be documented in this file.
   so it lives here rather than in the cross-platform `shells.nix`).
 - `alberth/common/latexmk.nix` — deploys `~/.config/latexmk/latexmkrc` via
   `xdg.configFile` (latexmk has no home-manager module of its own).
+- `alberth/common/git.nix` — ports the remaining dotfiles-era git config
+  into `programs.git`: the ~90-alias set (`programs.git.settings.alias`),
+  the Dracula `[color]`/`[color "branch"]`/etc. blocks (plain git
+  coloring, not delta — see Fixed below), and `commit.template` (via a new
+  `xdg.configFile."git/gitmessage"`). `programs.git.ignores`/`attributes`
+  now also carry the full pattern sets previously in the unmanaged
+  `gitignore`/`gitattributes` files. Not ported: `config.delta-themes`, a
+  513-line vendored copy of delta's own community `themes.gitconfig` (no
+  "dracula" theme among its 17); delta isn't installed or enabled anywhere
+  in the fleet, so it was dead weight. If delta gets enabled later, source
+  its theme from draculatheme.com/delta directly instead, matching this
+  project's other Dracula theming.
 
 ### Fixed
 
+- `alberth/common/git.nix` — the old hand-placed `~/.config/git/gitignore`
+  and `gitattributes` files were misnamed relative to git's actual default
+  lookup paths, `~/.config/git/ignore` and `~/.config/git/attributes`
+  (no leading `git`), so neither file was ever actually read by git. Also
+  dropped a duplicate `ls`/`las` alias pair: both were defined twice with
+  different meanings, and git's ini parser silently let the second
+  (unrelated) definition win, so the first pair was already dead in
+  practice.
 - `alberth/common/stylix.nix` — disabled `stylix.targets.vencord`. Vencord
   isn't installed anywhere in the fleet (BetterDiscord is the Discord mod
   actually used), so this target only ever produced an orphaned theme file

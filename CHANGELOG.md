@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
   (`tools.nix`), so the original file's existence guards were dropped.
 - `alberth/darwin/default.nix` — `tailscale` alias (assumes `/Applications`,
   so it lives here rather than in the cross-platform `shells.nix`).
+- `alberth/common/latexmk.nix` — deploys `~/.config/latexmk/latexmkrc` via
+  `xdg.configFile` (latexmk has no home-manager module of its own).
 
 ### Fixed
 

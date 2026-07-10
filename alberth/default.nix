@@ -16,6 +16,7 @@ in
     ./common/devenv.nix
     ./common/git.nix
     ./common/gpg.nix
+    ./common/latexmk.nix
     ./common/packages.nix
     ./common/shells.nix
     ./common/ssh.nix

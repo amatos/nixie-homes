@@ -10,6 +10,12 @@
     ./ghostty.nix
   ];
 
+  # Darwin-only alias: assumes /Applications, so it doesn't belong in
+  # common/shells.nix (also used by NixOS hosts).
+  home.shellAliases = {
+    tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
+  };
+
   # GPG agent — use pinentry-mac for native macOS Keychain / Touch ID prompts.
   # pinentry-mac is also available via homebrew brew on hosts that use Homebrew;
   # we point gpg-agent at the nixpkgs derivation for a deterministic path.

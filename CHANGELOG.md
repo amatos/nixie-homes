@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- `alberth/common/shells.nix` — `ll`/`llt`/`lls`/`ll@` (eza), `ta`/`tl`/`tn`
+  (tmux), and `tgz` shell aliases, folded in from a hand-maintained
+  `~/.config/zsh/aliases.zsh` that wasn't actually sourced by the managed
+  `.zshrc`/`.zshenv` and was therefore dead. eza/tmux are enabled fleet-wide
+  (`tools.nix`), so the original file's existence guards were dropped.
+- `alberth/darwin/default.nix` — `tailscale` alias (assumes `/Applications`,
+  so it lives here rather than in the cross-platform `shells.nix`).
+
 ### Fixed
 
 - `alberth/common/stylix.nix` — disabled `stylix.targets.vencord`. Vencord

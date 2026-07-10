@@ -20,6 +20,21 @@ in
     nixflakeup = "pushd $HOME/Projects/nixie && nix flake update && git add flake.lock && git commit -m 'chore: updated flake.lock' && git push && popd";
     npbs = "nixpull && nixbuild && nixswitch";
     ragenix = "ragenix -i ~/.config/age/yubikey-identity.txt";
+
+    # `ls` itself is a per-shell function below (rewrites -t to --sort=newest);
+    # eza is enabled fleet-wide (tools.nix), so no existence guard is needed.
+    ll = "ls -ahl --classify=auto ";
+    llt = "ls -ahlt --classify=auto --sort=modified --reverse "; # sorted by time
+    lls = "ls -ahls --classify=auto "; # show size
+    "ll@" = "ls -@ahl --classify=auto "; # show extended attributes (macOS)
+
+    # tmux is enabled fleet-wide (tools.nix)
+    ta = "tmux attach -t"; # Attach to named session
+    tl = "tmux list-sessions"; # List active sessions
+    tn = "tmux new -s"; # Create named session
+
+    # macOS-friendly tar: don't include resource forks, skip Finder metadata
+    tgz = "COPYFILE_DISABLE=1 tar --exclude='.DS_Store' -czf";
   };
 
   programs.bash.shellAliases.nixbuild = "pushd $HOME/Projects/nixie && ${rebuildCmd} build .#$(hostname) && popd";

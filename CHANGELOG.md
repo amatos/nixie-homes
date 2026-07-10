@@ -27,6 +27,13 @@ All notable changes to this project will be documented in this file.
   in the fleet, so it was dead weight. If delta gets enabled later, source
   its theme from draculatheme.com/delta directly instead, matching this
   project's other Dracula theming.
+- `alberth/common/zed.nix` — deploys `~/.config/zed/settings.json` as an
+  out-of-store symlink (`config.lib.file.mkOutOfStoreSymlink`) to
+  `alberth/common/zed/settings.json` in this repo's working copy, instead
+  of a plain `xdg.configFile` `text =` block. Zed settings are normally
+  hand-edited via the app itself (command palette: "zed: open settings");
+  a store symlink would make that read-only. Requires nixie-homes checked
+  out at `~/Projects/nixie-homes` on any machine consuming this module.
 
 ### Fixed
 

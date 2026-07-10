@@ -24,6 +24,7 @@ in
     ./common/stylix.nix
     ./common/theming.nix
     ./common/tools.nix
+    ./common/zed.nix
   ];
 
   home.username = primaryUser;

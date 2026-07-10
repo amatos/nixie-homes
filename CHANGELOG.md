@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+---
+
+## 26.07.02
+
 ### Added
 
 - `.envrc` (`use flake`) — direnv now loads the devShell automatically on
@@ -12,12 +16,14 @@ All notable changes to this project will be documented in this file.
   `sharedHomeModules` and enabled via `programs.direnv-instant.enable = true`
   in `alberth/common/tools.nix` — runs direnv in a background daemon so the
   shell prompt returns immediately instead of blocking on `.envrc`.
+- `alberth/nixify` — empty bash script scaffold for future work.
 
 ### Changed
 
 - `alberth/common/tools.nix` — disabled `programs.direnv`'s own
   bash/zsh/fish/nushell shell hook integrations (`nix-direnv` itself stays
   enabled); `direnv-instant` now owns the shell hook for all four shells.
+- `flake.nix` — dropped the unused `self` function arg flagged by nixd.
 
 ---
 

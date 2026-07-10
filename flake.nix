@@ -1,5 +1,5 @@
 {
-  description = "nixie-homes — standalone home-manager configurations, usable with or without nixie";
+  description = "nix-alberth-home — standalone home-manager configurations, usable with or without nixie";
 
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0"; # Stable Nixpkgs (use 0.1 for unstable)
@@ -193,7 +193,7 @@
         in
         {
           default = pkgs.mkShell {
-            name = "nixie-homes";
+            name = "nix-alberth-home";
             packages = [ pkgs.nixfmt ];
             # Installs git hooks into .git/hooks when entering the devShell
             inherit (preCommitCheck.${system}) shellHook;

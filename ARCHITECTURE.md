@@ -2,18 +2,18 @@
 
 This is a thinner, self-focused view. [nixie](https://github.com/amatos/nixie)'s own
 `ARCHITECTURE.md` has the authoritative cross-repo picture (all four repos, the
-security/reuse reasoning, invariants); this document only covers how nixie-homes
+security/reuse reasoning, invariants); this document only covers how nix-alberth-home
 itself is put together and how it's consumed.
 
 ## Two ways to use this repo
 
-1. **Standalone** — `home-manager switch --flake github:amatos/nixie-homes#<user>@<host>`
+1. **Standalone** — `home-manager switch --flake github:amatos/nix-alberth-home#<user>@<host>`
    on any machine with Nix. No NixOS, no nix-darwin, no `nixie` required. Uses the
    `homeConfigurations."<user>@<host>"` flake output, built with this repo's own
    `nixpkgs`/`home-manager`/`nvf`/`qmd`/`stylix` inputs and `nix-secrets` (`flake =
    false`, for the age identity file).
 2. **Integrated into `nixie`** — `nixie` declares this repo as a real flake input
-   (`inputs.nixie-homes`, with `nixpkgs`/`home-manager`/`nix-secrets`/`nvf`/`qmd`/
+   (`inputs.nix-alberth-home`, with `nixpkgs`/`home-manager`/`nix-secrets`/`nvf`/`qmd`/
    `stylix` all `.follows`-pinned to its own), and imports individual
    `homeModules.<name>` outputs into `home-manager.users.alberth.imports` on each
    host. `nixie` never touches this repo's raw files by path — only its named flake
@@ -24,7 +24,7 @@ duplication between them.
 
 ## The one-way dependency
 
-`nixie` depends on `nixie-homes`; `nixie-homes` never depends on `nixie`. Concretely:
+`nixie` depends on `nix-alberth-home`; `nix-alberth-home` never depends on `nixie`. Concretely:
 
 - No relative-path import in `alberth/` crosses the repo boundary (e.g. no
   `../../nixie/users.nix`). This repo has its own local `users.nix` for
@@ -33,7 +33,7 @@ duplication between them.
 - If a module here needs data only `nixie` has, it gets threaded through
   `extraSpecialArgs` from `nixie`'s own `home-manager.extraSpecialArgs` (the consuming
   side) — never by this repo reaching backward into `nixie`.
-- `nixie-homes` can be fetched, evaluated, and built with zero knowledge of `nixie`
+- `nix-alberth-home` can be fetched, evaluated, and built with zero knowledge of `nixie`
   existing at all (verify with `nix build
   '.#homeConfigurations."alberth@codex".activationPackage' --dry-run` from a fresh
   checkout).

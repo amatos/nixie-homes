@@ -7,11 +7,11 @@
 # repo's working copy — edits made through Zed land directly on a
 # repo-tracked file, to be committed here whenever you want to snapshot them.
 #
-# Requires nixie-homes checked out at ~/Projects/nixie-homes on any machine
-# consuming this module; a plain string (not a Nix path literal) is used so
-# it isn't resolved against the flake's store-copied source when nixie-homes
-# is consumed as a locked flake input.
+# Requires nix-alberth-home checked out at ~/Projects/nix-alberth-home on any
+# machine consuming this module; a plain string (not a Nix path literal) is
+# used so it isn't resolved against the flake's store-copied source when
+# nix-alberth-home is consumed as a locked flake input.
 {
   xdg.configFile."zed/settings.json".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Projects/nixie-homes/alberth/common/zed/settings.json";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Projects/nix-alberth-home/alberth/common/zed/settings.json";
 }

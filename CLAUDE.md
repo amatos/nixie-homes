@@ -1,4 +1,4 @@
-# nix-alberth-home — project directives
+# nix-home-alberth — project directives
 
 ## Agent conventions
 
@@ -14,21 +14,21 @@ authoritative cross-repo picture; this repo's copy is a thinner, self-focused vi
 
 ## What this is
 
-nix-alberth-home holds [home-manager](https://github.com/nix-community/home-manager)
+nix-home-alberth holds [home-manager](https://github.com/nix-community/home-manager)
 configuration for alberth (and, potentially, other users in the future) — usable two ways:
 
 - **Standalone**, on any machine with Nix, independent of nixie: `home-manager switch
-  --flake github:amatos/nix-alberth-home#<user>@<host>`. No NixOS or nix-darwin required.
+  --flake github:amatos/nix-home-alberth#<user>@<host>`. No NixOS or nix-darwin required.
   Ready-to-use configs exist for `alberth@codex`, `alberth@darwintron`, and
   `alberth@gammu` (`homeConfigurations` in `flake.nix`).
 - **Integrated**, consumed by nixie's own NixOS/darwin-managed home-manager via the
-  `nix-alberth-home` flake input's `homeModules.<name>` outputs, the same way nixie already
+  `nix-home-alberth` flake input's `homeModules.<name>` outputs, the same way nixie already
   consumes `nix-secrets` and `nix-keytabs-matos-cc` for secrets — except this is a real
   flake input, not `flake = false`.
 
-**The dependency direction is one-way: nixie depends on nix-alberth-home, never the
+**The dependency direction is one-way: nixie depends on nix-home-alberth, never the
 reverse.** Unlike `nix-secrets`/`nix-keytabs-matos-cc` (plain `flake = false` repos),
-nix-alberth-home is a real flake with its own `nixpkgs`, `home-manager`, `nvf`, `qmd`,
+nix-home-alberth is a real flake with its own `nixpkgs`, `home-manager`, `nvf`, `qmd`,
 `stylix`, and `nix-secrets` (`flake = false`) inputs (all `.follows`-pinned to
 nixie's own, when consumed as its input) — that's what makes standalone use possible.
 It must never reach back into nixie: no relative-path imports crossing the repo
@@ -79,7 +79,7 @@ this is" above for which hosts).
 
 Adding a new host overlay: create `alberth/<host>.nix`, add a `homeModules.alberth-<host>`
 entry and (optionally) a `homeConfigurations."alberth@<host>"` entry in `flake.nix`,
-commit and push. If nixie needs it, run `nix flake lock --update-input nix-alberth-home`
+commit and push. If nixie needs it, run `nix flake lock --update-input nix-home-alberth`
 there afterward — it can't see an unpushed commit.
 
 ---

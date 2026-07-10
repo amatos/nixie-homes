@@ -32,8 +32,8 @@ All notable changes to this project will be documented in this file.
   `alberth/common/zed/settings.json` in this repo's working copy, instead
   of a plain `xdg.configFile` `text =` block. Zed settings are normally
   hand-edited via the app itself (command palette: "zed: open settings");
-  a store symlink would make that read-only. Requires nix-alberth-home
-  checked out at `~/Projects/nix-alberth-home` on any machine consuming
+  a store symlink would make that read-only. Requires nix-home-alberth
+  checked out at `~/Projects/nix-home-alberth` on any machine consuming
   this module.
 
 ### Changed

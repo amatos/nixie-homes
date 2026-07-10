@@ -1,4 +1,4 @@
-# nix-alberth-home
+# nix-home-alberth
 
 [Home-manager](https://github.com/nix-community/home-manager) configuration for alberth,
 usable with or without [nixie](https://github.com/amatos/nixie).
@@ -8,7 +8,7 @@ usable with or without [nixie](https://github.com/amatos/nixie).
 On any machine with Nix — no NixOS, no nix-darwin, no `nixie` required:
 
 ```bash
-home-manager switch --flake github:amatos/nix-alberth-home#alberth@codex
+home-manager switch --flake github:amatos/nix-home-alberth#alberth@codex
 # or: alberth@darwintron, alberth@gammu
 ```
 
@@ -35,7 +35,7 @@ A devShell is provided for this repo's own tooling (`nixfmt`, plus the pre-commi
 nix develop
 
 # Or, if direnv is installed and .envrc is allowed:
-cd nix-alberth-home   # shell loads automatically
+cd nix-home-alberth   # shell loads automatically
 ```
 
 To activate direnv:

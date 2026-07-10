@@ -39,16 +39,16 @@ in
     '';
   };
 
-  # steamup — headless gamescope + Steam Big Picture session for Steam
+  # steam — headless gamescope + Steam Big Picture session for Steam
   # Remote Play, as alberth. gamescope's `headless` backend creates no
   # physical or virtual display, so this needs nothing plugged in.
   #
   # gamescope is ExecStart's main process (Type = "exec") — not a detaching
   # wrapper script — so systemd tracks its actual PID: `systemctl --user
-  # start/stop/restart steamup` really starts/stops/restarts the session,
+  # start/stop/restart steam` really starts/stops/restarts the session,
   # and stopping it also kills Steam and any running game underneath via
   # systemd's default KillMode (control-group), no manual `pkill` needed.
-  # Logs go to the journal (`journalctl --user -u steamup -f`) instead of a
+  # Logs go to the journal (`journalctl --user -u steam -f`) instead of a
   # log file.
   #
   # /run/current-system/sw/bin/{gamescope,steam} — not ${pkgs.gamescope} /
@@ -63,7 +63,7 @@ in
   # XDG_RUNTIME_DIR/D-Bus session Steam's -pipewire-dmabuf flag needs — with
   # users.users.alberth.linger = true (hosts/nixos/gammu/default.nix)
   # starting that session at boot without an interactive login.
-  systemd.user.services.steamup = {
+  systemd.user.services.steam = {
     Unit = {
       Description = "Headless gamescope + Steam Big Picture session for Remote Play";
     };

@@ -35,6 +35,13 @@ All notable changes to this project will be documented in this file.
   a store symlink would make that read-only. Requires nixie-homes checked
   out at `~/Projects/nixie-homes` on any machine consuming this module.
 
+### Changed
+
+- `alberth/gammu.nix` — renamed the `steamup` systemd user unit to `steam`
+  (`systemd.user.services.steam`); update any `systemctl --user
+  start/stop/restart steamup` / `journalctl --user -u steamup` usage to
+  `steam`.
+
 ### Fixed
 
 - `alberth/common/git.nix` — the old hand-placed `~/.config/git/gitignore`

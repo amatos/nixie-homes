@@ -42,7 +42,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       nix-secrets,

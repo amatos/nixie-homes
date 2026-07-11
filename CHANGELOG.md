@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Removed
+
+- `alberth/common/shells.nix` — dropped the `ragenix` shell alias
+  (`ragenix -i ~/.config/age/yubikey-identity.txt`) from `home.shellAliases`,
+  applied fleet-wide across bash/zsh/fish.
+
 ### Added
 
 - `alberth/common/shells.nix` — `ll`/`llt`/`lls`/`ll@` (eza), `ta`/`tl`/`tn`

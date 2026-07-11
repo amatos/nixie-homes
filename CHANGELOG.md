@@ -68,6 +68,15 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- `alberth/common/starship.nix` — the `dracula` palette's `crust`/`base`/
+  `mantle` entries (`#11111b`/`#1e1e2e`/`#181825`) were Catppuccin Mocha
+  values, not Dracula's — likely copy-pasted from another palette block.
+  Replaced with the actual palette from
+  `github.com/dracula/starship/starship.theme.toml`: renamed `crust` to
+  `background` (`#282a36`, Dracula's real background shade) and updated
+  every `fg:crust` segment reference; dropped `base`, `mantle`, and `blue`
+  (`#644ac9`, not part of the official palette), all three unused outside
+  the palette declaration itself.
 - `alberth/common/git.nix` — the old hand-placed `~/.config/git/gitignore`
   and `gitattributes` files were misnamed relative to git's actual default
   lookup paths, `~/.config/git/ignore` and `~/.config/git/attributes`

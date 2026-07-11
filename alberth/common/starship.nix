@@ -25,26 +25,23 @@ _:
 
     palette = "dracula";
 
-    # Dracula colour palette — named tokens used in segment styles above.
-    # crust (#11111b) is used as foreground text on bright segment backgrounds.
+    # Official Dracula palette (github.com/dracula/starship/starship.theme.toml)
+    # — background is used as foreground text on bright segment backgrounds.
     palettes.dracula = {
       pink = "#ff79c6";
       red = "#ff5555";
       yellow = "#f1fa8c";
       green = "#50fa7b";
-      blue = "#644ac9";
       purple = "#bd93f9";
       cyan = "#8be9fd";
       comment = "#6272a4";
-      base = "#1e1e2e";
-      mantle = "#181825";
-      crust = "#11111b";
+      background = "#282a36";
     };
 
     # OS icon — purple segment
     os = {
       disabled = false;
-      style = "bg:purple fg:crust";
+      style = "bg:purple fg:background";
       symbols = {
         Windows = "";
         Ubuntu = "󰕈";
@@ -71,7 +68,7 @@ _:
     # Username — always shown, same purple segment as OS
     username = {
       show_always = true;
-      style_user = "bg:purple fg:crust";
+      style_user = "bg:purple fg:background";
       style_root = "bg:purple fg:red";
       format = "[ $user]($style)";
     };
@@ -79,13 +76,13 @@ _:
     # Hostname — purple segment, always shown
     hostname = {
       ssh_only = false;
-      style = "bg:purple fg:crust";
+      style = "bg:purple fg:background";
       format = "[@$hostname ]($style)";
     };
 
     # Directory — cyan segment
     directory = {
-      style = "bg:cyan fg:crust";
+      style = "bg:cyan fg:background";
       format = "[ $path ]($style)";
       truncation_length = 3;
       truncation_symbol = "…/";
@@ -103,74 +100,74 @@ _:
     git_branch = {
       symbol = "";
       style = "bg:pink";
-      format = "[[ $symbol $branch ](fg:crust bg:pink)]($style)";
+      format = "[[ $symbol $branch ](fg:background bg:pink)]($style)";
     };
 
     # Git status — pink segment (same block as branch)
     git_status = {
       style = "bg:pink";
-      format = "[[($all_status$ahead_behind )](fg:crust bg:pink)]($style)";
+      format = "[[($all_status$ahead_behind )](fg:background bg:pink)]($style)";
     };
 
     # Language / toolchain segments — green block
     c = {
       symbol = " ";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     rust = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     golang = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     nodejs = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     php = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     java = {
       symbol = " ";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     kotlin = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     haskell = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version) ](fg:background bg:green)]($style)";
     };
 
     python = {
       symbol = "";
       style = "bg:green";
-      format = "[[ $symbol( $version)(\\($virtualenv\\)) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol( $version)(\\($virtualenv\\)) ](fg:background bg:green)]($style)";
     };
 
     # Conda environment — comment segment
     conda = {
       symbol = "  ";
-      style = "fg:crust bg:comment";
+      style = "fg:background bg:comment";
       format = "[$symbol$environment ]($style)";
       ignore_base = false;
     };
@@ -180,7 +177,7 @@ _:
       disabled = false;
       time_format = "%_I:%M %p";
       style = "bg:comment";
-      format = "[[  $time ](fg:crust bg:comment)]($style)";
+      format = "[[  $time ](fg:background bg:comment)]($style)";
     };
 
     line_break.disabled = true;
@@ -210,7 +207,7 @@ _:
     nix_shell = {
       symbol = " ";
       style = "bg:green";
-      format = "[[ $symbol$state( \\($name\\)) ](fg:crust bg:green)]($style)";
+      format = "[[ $symbol$state( \\($name\\)) ](fg:background bg:green)]($style)";
       impure_msg = "impure";
       pure_msg = "pure";
     };

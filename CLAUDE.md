@@ -90,6 +90,8 @@ there afterward — it can't see an unpushed commit.
   (`feat:`, `fix:`, `chore:`, etc.), matching nixie's style, enforced by the same
   commitlint/markdownlint-cli2/nixfmt pre-commit hooks as nixie (`flake.nix`,
   `.commitlintrc.yaml`) — run `nix develop` once to install them.
+- All commits must be GPG-signed (`git commit -S`), matching nixie's requirement.
+  Enforced in CI by the `verify-signed-commits` job in `.github/workflows/ci.yml`.
 - Never add a relative-path import that reaches outside this repo into nixie (or any
   other repo) — see "What this is" above. If a home-manager module needs data that
   only nixie has, thread it through `extraSpecialArgs` from the *consuming* flake

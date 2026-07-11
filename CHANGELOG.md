@@ -35,6 +35,22 @@ All notable changes to this project will be documented in this file.
   a store symlink would make that read-only. Requires nix-home-alberth
   checked out at `~/Projects/nix-home-alberth` on any machine consuming
   this module.
+- `alberth/default.nix` — deploys `~/.local/bin/$` and `~/.local/bin/extract`
+  (`alberth/scripts/dollar.sh`/`extract.sh`), and `~/.editorconfig`, ported
+  from the dotfiles-era chezmoi repo.
+- `alberth/darwin/default.nix` — deploys `~/.local/bin/control-dock.sh`
+  (dock autohide toggle) and `~/Library/Application Scripts/
+  com.sindresorhus.Velja/open.sh` (Velja's URL-open handler), both
+  macOS-only, ported from the dotfiles-era chezmoi repo.
+- `alberth/common/gpg.nix` — ports the remaining settings from the
+  dotfiles-era `~/.gnupg/gpg.conf` (drduh/YubiKey-Guide) not already
+  covered by home-manager's `programs.gpg` built-in defaults: `charset`,
+  `no-greeting`, `require-secmem`, `armor`, `use-agent`,
+  `auto-key-locate`, `auto-key-retrieve`, and `default-key`/`trusted-key`
+  (wired to `user.gpgSigningKey` rather than a hardcoded fingerprint). The
+  original file's `throw-keyids` was deliberately *not* ported — it
+  strips recipient key IDs from encrypted messages, which also breaks
+  Mailvelope, and isn't needed.
 
 ### Changed
 

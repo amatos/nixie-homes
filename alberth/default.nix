@@ -53,6 +53,45 @@ in
     executable = true;
   };
 
+  # "$ somecommand" copy-paste guard — strips a leading "$" and runs the rest.
+  home.file.".local/bin/$" = {
+    source = ./scripts/dollar.sh;
+    executable = true;
+  };
+
+  # extract <file> — archive extraction/mounting dispatcher.
+  home.file.".local/bin/extract" = {
+    source = ./scripts/extract.sh;
+    executable = true;
+  };
+
+  # .editorconfig — https://editorconfig.org
+  home.file.".editorconfig".text = ''
+    # EditorConfig is awesome: https://editorconfig.org
+
+    # top-most EditorConfig file
+    root = true
+
+    # Unix-style newlines with a newline ending every file
+    [*]
+    end_of_line = lf
+    insert_final_newline = true
+
+    # Default 2 space indentation
+    [*]
+    indent_style = space
+    indent_size = 2
+
+    # 4 space indentation
+    [*.py]
+    indent_style = space
+    indent_size = 4
+
+    # Tab indentation (no size specified)
+    [Makefile]
+    indent_style = tab
+  '';
+
   # Environment variables applied to all shells
   home.sessionVariables = {
     ALTERNATE_EDITOR = "";

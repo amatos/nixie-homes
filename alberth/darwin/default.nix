@@ -16,6 +16,19 @@
     tailscale = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
   };
 
+  # Dock autohide toggle (osascript is macOS-only).
+  home.file.".local/bin/control-dock.sh" = {
+    source = ../scripts/control-dock.sh;
+    executable = true;
+  };
+
+  # Velja (https://sindresorhus.com/velja) invokes this script to open URLs;
+  # macOS resolves it via the app's Application Scripts sandbox container.
+  home.file."Library/Application Scripts/com.sindresorhus.Velja/open.sh" = {
+    source = ../scripts/velja-open.sh;
+    executable = true;
+  };
+
   # GPG agent — use pinentry-mac for native macOS Keychain / Touch ID prompts.
   # pinentry-mac is also available via homebrew brew on hosts that use Homebrew;
   # we point gpg-agent at the nixpkgs derivation for a deterministic path.

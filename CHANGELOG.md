@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- `alberth/common/zed/settings.json` — `agent_servers` entries for `gemini`,
+  `github-copilot-cli`, and `codex-acp` (all `registry`-sourced), alongside
+  the existing `claude-acp` entry, so Zed's Agent Panel can drive those ACP
+  agents too.
+
 ### Changed
 
 - `alberth/common/atuin.nix` — `ai.enabled = false` in `programs.atuin.settings`,

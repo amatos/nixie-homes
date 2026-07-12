@@ -12,6 +12,15 @@
     "font_family": "ZedMono Nerd Font Mono",
   },
   "agent_servers": {
+    "gemini": {
+      "type": "registry"
+    },
+    "github-copilot-cli": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
     "claude-acp": {
       "default_config_options": {
         "mode": "auto"

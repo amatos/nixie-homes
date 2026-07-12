@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- `alberth/common/atuin.nix` — `ai.enabled = false` in `programs.atuin.settings`,
+  disabling atuin's `?`-at-empty-prompt keybind (Atuin AI / natural language
+  mode) that atuin's shell integration binds by default.
+
 ---
 
 ## 26.07.04

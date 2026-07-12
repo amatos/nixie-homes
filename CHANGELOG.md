@@ -33,6 +33,11 @@ All notable changes to this project will be documented in this file.
   disabling atuin's `?`-at-empty-prompt keybind (Atuin AI / natural language
   mode) that atuin's shell integration binds by default.
 
+### Removed
+
+- `alberth/codex.nix` — removed the `muninn` SSH `Host` stanza; the old muninn host is
+  retired and its name is being recycled for a new, unrelated host.
+
 ---
 
 ## 26.07.04

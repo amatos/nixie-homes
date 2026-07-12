@@ -15,9 +15,6 @@
     "gemini": {
       "type": "registry"
     },
-    "github-copilot-cli": {
-      "type": "registry"
-    },
     "codex-acp": {
       "type": "registry"
     },

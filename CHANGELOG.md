@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+---
+
+## 26.07.05
+
 ### Added
 
 - `alberth/scripts/update-flake.py`, deployed to `~/.local/bin/update-flake.py`
@@ -17,10 +21,9 @@ All notable changes to this project will be documented in this file.
   on every run — a disposable single-commit branch, not an accumulating
   history; a future CI workflow will trigger on pushes to it and merge into
   `main` once checks pass.
-- `alberth/common/zed/settings.json` — `agent_servers` entries for `gemini`,
-  `github-copilot-cli`, and `codex-acp` (all `registry`-sourced), alongside
-  the existing `claude-acp` entry, so Zed's Agent Panel can drive those ACP
-  agents too.
+- `alberth/common/zed/settings.json` — `agent_servers` entries for `gemini`
+  and `codex-acp` (both `registry`-sourced), alongside the existing
+  `claude-acp` entry, so Zed's Agent Panel can drive those ACP agents too.
 
 ### Changed
 
@@ -33,6 +36,19 @@ All notable changes to this project will be documented in this file.
 - `alberth/common/atuin.nix` — `ai.enabled = false` in `programs.atuin.settings`,
   disabling atuin's `?`-at-empty-prompt keybind (Atuin AI / natural language
   mode) that atuin's shell integration binds by default.
+
+### Fixed
+
+- `alberth/common/zed/settings.json` — dropped the `github-copilot-cli`
+  `agent_servers` entry added above; it didn't work as a Zed ACP agent.
+- `alberth/nixos.nix` — porkchop was still excluded from `home.packages`'
+  `pkgs.krb5` (added for every other NixOS host, providing user-PATH
+  `kinit`/`klist`/`kdestroy`) via a guard that predates nixie's
+  ARCHITECTURE.md §10 Stage 4: porkchop's `services.kerberosLdap` role is
+  now decommissioned, so its `environment.systemPackages` no longer
+  carries `krb5WithLdap` and the user-PATH shadowing conflict the guard
+  worked around no longer applies. porkchop is now a plain krb5 client
+  like every other NixOS host.
 
 ### Removed
 

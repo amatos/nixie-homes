@@ -17,20 +17,22 @@ in
 {
   imports = lib.optional (builtins.pathExists hostFile) hostFile;
 
-  home.packages =
-    with pkgs;
-    [
-      _1password-gui # 1Password desktop app
-      _1password-cli # 1Password CLI (op)
-      # SSH client with GSSAPI support for Kerberos authentication.
-      # pkgs.openssh does not include GSSAPI; this shadows it in the user PATH.
-      openssh_gssapi
-    ]
-    # krb5 provides kinit/klist/kdestroy for the MATOS.CC realm.
-    # Excluded on porkchop: system packages include krb5WithLdap (LDAP backend),
-    # and home packages shadow system packages in the user PATH — adding the
-    # non-LDAP build here would cause kadmin.local to resolve to the wrong binary.
-    ++ lib.optionals (hostName != "porkchop") [ pkgs.krb5 ];
+  home.packages = with pkgs; [
+    _1password-gui # 1Password desktop app
+    _1password-cli # 1Password CLI (op)
+    # SSH client with GSSAPI support for Kerberos authentication.
+    # pkgs.openssh does not include GSSAPI; this shadows it in the user PATH.
+    openssh_gssapi
+    # krb5 provides kinit/klist/kdestroy for the MATOS.CC realm. Previously
+    # excluded on porkchop (its system packages included krb5WithLdap, the
+    # LDAP-backend build, and home packages shadow system packages in the
+    # user PATH — adding the plain build here would have shadowed
+    # kadmin.local's LDAP-enabled binary). No longer applicable: porkchop's
+    # Kerberos+LDAP server role was decommissioned in nixie's
+    # ARCHITECTURE.md §10 Stage 4, so it's a plain krb5 client like every
+    # other NixOS host now.
+    krb5
+  ];
 
   home.shellAliases = {
     open = "xdg-open";

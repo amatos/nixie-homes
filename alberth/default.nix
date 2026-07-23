@@ -43,7 +43,7 @@ in
   # XDG base directories — moves config, cache, and data out of ~
   xdg.enable = true;
 
-  # age identity — symlinked to the canonical location so ragenix and age tools
+  # age identity — symlinked to the canonical location so sops and age tools
   # find it without requiring an explicit -i flag (via the shell alias in shells.nix).
   home.file.".config/age/yubikey-identity.txt".source =
     "${nix-secrets}/age-yubikey-identity-d43f4e92.txt";

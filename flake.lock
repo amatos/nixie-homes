@@ -270,11 +270,11 @@
     "nix-secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1783543549,
-        "narHash": "sha256-iiz6CD0cqCtsN1wEcwN1N82Jm4fc9fPVEqdCi9WAjB8=",
+        "lastModified": 1784773363,
+        "narHash": "sha256-rBWNmjITu2BbzaAYW/VwyQDwMcIgUE0TvE97UhQdxAY=",
         "owner": "amatos",
         "repo": "nix-secrets",
-        "rev": "e1c5c1e3da1bc665e12cd684f9da7a3f85741d25",
+        "rev": "1beedef5638bd8f7f5222e3f179433cad64e0ba5",
         "type": "github"
       },
       "original": {

@@ -46,7 +46,7 @@ in
   # age identity — symlinked to the canonical location so sops and age tools
   # find it without requiring an explicit -i flag (via the shell alias in shells.nix).
   home.file.".config/age/yubikey-identity.txt".source =
-    "${nix-secrets}/age-yubikey-identity-d43f4e92.txt";
+    "${nix-secrets}/age-yubikey-identity-b4d67c6f.txt";
 
   home.file.".local/bin/npbs-all" = {
     source = ./scripts/npbs-all.sh;

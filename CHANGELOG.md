@@ -6,6 +6,34 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## 26.07.06
+
+### Changed
+
+- `alberth/common/packages.nix` — swapped `ragenix` for `sops` in the
+  interactive package set, following nixie's migration off ragenix to
+  sops-nix.
+- `alberth/common/cachix.nix` — `secret="/run/agenix/cachix-authtoken"`
+  repointed to `/run/secrets/cachix-authtoken` (sops-nix's default path).
+- `alberth/default.nix` — the YubiKey identity-stub symlink comment
+  updated for accuracy (referenced `ragenix` specifically; the symlink
+  mechanism itself is unchanged).
+
+### Fixed
+
+- `alberth/default.nix` — `~/.config/age/yubikey-identity.txt` symlinked
+  to `nix-secrets/age-yubikey-identity-d43f4e92.txt`, an identity
+  `nix-secrets` retired and deleted as part of nixie's sops-nix migration
+  (caught during Phase 8's merge-to-main review — this file was never
+  updated when `nix-secrets` rotated away from that key). Repointed to
+  `age-yubikey-identity-b4d67c6f.txt`. Left unfixed, every `home-manager
+  switch` for this config would have failed trying to source a deleted
+  file.
+
+See `nixie`'s `SOPS_MIGRATION.md` for the full 8-phase migration record.
+
+---
+
 ## 26.07.05
 
 ### Added

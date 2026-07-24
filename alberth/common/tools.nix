@@ -52,16 +52,12 @@
     enableBashIntegration = false;
     enableZshIntegration = false;
     enableFishIntegration = false;
-    enableNushellIntegration = false;
   };
 
   # direnv-instant — non-blocking shell hook (runs direnv in a background
   # daemon so the prompt returns immediately); replaces programs.direnv's
-  # own hook integration above. Defaults enable bash/zsh/fish/nushell hooks.
+  # own hook integration above. Defaults enable bash/zsh/fish hooks.
   programs.direnv-instant.enable = true;
-
-  # Nushell
-  programs.nushell.enable = true;
 
   # tmux
   programs.tmux = {

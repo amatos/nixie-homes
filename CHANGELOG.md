@@ -12,6 +12,13 @@ All notable changes to this project will be documented in this file.
   `alberth@codex`/`alberth@gammu` pass `nixpkgs` (unstable) to match their
   nixie host counterparts, `alberth@darwintron` stays on the stable
   default.
+- `alberth/common/tools.nix` — removed nushell (`programs.nushell.enable`
+  and the now-moot `programs.direnv.enableNushellIntegration = false;`
+  alongside it). With `programs.nushell.enable`, home-manager's fzf module
+  defaults `enableNushellIntegration` to `true`, which asserts
+  `fzf >= 0.73.0` — a version the fzf package in nixpkgs-stable doesn't
+  meet, hard-failing evaluation for every nixpkgs-stable-channel host (see
+  the `flake.nix` entry above).
 - `alberth/common/tools.nix` — reverted the previous `historyWidget.command`
   fzf setting: that option doesn't exist (home-manager's own flat
   `historyWidgetCommand` was removed upstream — "no longer supported by

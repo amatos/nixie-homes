@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- `alberth/common/tools.nix` - `programs.fzf.historyWidget.command` set to
+  `""`, disabling fzf's own CTRL-R binding. `alberth/common/atuin.nix`
+  already binds CTRL-R for atuin's history search; an empty string is
+  home-manager's supported way to yield the CTRL-R binding to a history
+  manager like Atuin (see the option's own description in `fzf.nix`).
+  Without this, fzf's shell integration was silently fighting atuin for
+  the same keybinding.
+
 ---
 
 ## 26.07.06

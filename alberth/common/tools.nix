@@ -1,6 +1,16 @@
 { pkgs, ... }:
 
 {
+  # Nushell isn't used — but every program module's enableNushellIntegration
+  # (fzf, zoxide, etc.) defaults to true via home.shell.enableShellIntegration
+  # regardless of whether programs.nushell.enable is set, so disabling it
+  # here (once, globally) is the only way to actually turn it off rather
+  # than hunting down each program's own option. Needed concretely because
+  # home-manager's fzf module asserts fzf >= 0.73.0 whenever its
+  # enableNushellIntegration resolves true, which the fzf package in
+  # nixpkgs-stable doesn't meet (see nixie's CLAUDE.md "Nixpkgs channels").
+  home.shell.enableNushellIntegration = false;
+
   # eza (modern ls replacement)
   programs.eza = {
     enable = true;

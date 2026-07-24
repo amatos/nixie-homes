@@ -14,11 +14,16 @@ All notable changes to this project will be documented in this file.
   default.
 - `alberth/common/tools.nix` — removed nushell (`programs.nushell.enable`
   and the now-moot `programs.direnv.enableNushellIntegration = false;`
-  alongside it). With `programs.nushell.enable`, home-manager's fzf module
-  defaults `enableNushellIntegration` to `true`, which asserts
-  `fzf >= 0.73.0` — a version the fzf package in nixpkgs-stable doesn't
-  meet, hard-failing evaluation for every nixpkgs-stable-channel host (see
-  the `flake.nix` entry above).
+  alongside it), and added `home.shell.enableNushellIntegration = false;`.
+  Every program module's own `enableNushellIntegration` (fzf, zoxide, etc.)
+  defaults to `true` via `home.shell.enableShellIntegration` regardless of
+  whether `programs.nushell.enable` is set, so removing the latter alone
+  didn't stop home-manager's fzf module from still asserting
+  `fzf >= 0.73.0` whenever its `enableNushellIntegration` resolved `true` —
+  a version the fzf package in nixpkgs-stable doesn't meet, hard-failing
+  evaluation for every nixpkgs-stable-channel host (see the `flake.nix`
+  entry above). The `home.shell` option is the single point that actually
+  turns it off, rather than hunting down each program's own flag.
 - `alberth/common/tools.nix` — reverted the previous `historyWidget.command`
   fzf setting: that option doesn't exist (home-manager's own flat
   `historyWidgetCommand` was removed upstream — "no longer supported by
